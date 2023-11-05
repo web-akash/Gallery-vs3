@@ -5,7 +5,7 @@ Welcome to the **Gallery Application**, a dynamically designed and fully respons
 
 ![screencapture-127-0-0-1-5173-2023-11-05-23_38_34](https://github.com/web-akash/Gallery-vs3/assets/95634170/5cffeb1b-4e03-418f-85d8-60e02346e74f)
 
-### What You'll Get with This Landing Page:
+### What You'll Get with This  Gallery Application:
 - **Drag-and-drop functionality**
 - **Allow users to select multiple images and delete the**
 - **This gallery feature image larger than the others**
@@ -13,6 +13,6 @@ Welcome to the **Gallery Application**, a dynamically designed and fully respons
 - **Grid layout for the image gallery**
 - **Clear visual indication of selected images**
 - **Users set a feature image by sorting**
-- **smooth and responsive user experience**
+- **Pretend the first image (from the LTR direction)**
 
 Feel free to explore more of my work in my portfolio: [Akash Coder's Portfolio](https://www.fiverr.com/akash_coder)
