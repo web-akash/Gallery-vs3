@@ -114,8 +114,6 @@ function App() {
                         src={"./assets/noPhoto.jpg"}
                         className="absolute top-[50%] left-[50%] translate-y-[-50%] translate-x-[-50%]"
                         alt={`./assets/noPhoto.jpg`}
-                        onDragStart={(e) => handleDragStart(e, 0)}
-                        draggable={true}
                       />
                     </Picture>
                   </Box>
@@ -161,7 +159,6 @@ function App() {
 
               {images
                 .filter((_, index) => index !== 0)
-                .reverse()
                 .map((image, index) => (
                   <Box
                     key={index + 1}
