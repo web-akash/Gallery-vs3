@@ -9,15 +9,9 @@ import Picture from "./Components/Picture";
 import Label from "./Components/Label";
 
 function App() {
-  const [images, setImages] = useState([
-    "./assets/image-1.webp",
-    "./assets/image-2.webp",
-    "./assets/image-3.webp",
-    "./assets/image-4.webp",
-    "./assets/image-5.webp",
-    // Add more image URLs here
-  ]);
+  const [images, setImages] = useState([]);
   console.log(images.length);
+  const [showNoPhoto, setShowNoPhoto] = useState(true);
 
   const [selectedImages, setSelectedImages] = useState([]);
   const [featureImageIndex, setFeatureImageIndex] = useState(0);
@@ -58,8 +52,8 @@ function App() {
 
   return (
     <>
-      <Box className="bg-blue-100 min-h-screen  flex items-center ">
-        <Box className="max-w-screen-xl w-full  bg-white mx-auto rounded-xl border ">
+      <Box className="bg-blue-100 min-h-screen overflow-x-hidden md:py-4 flex items-center ">
+        <Box className="max-w-screen-xl w-full   bg-white mx-auto rounded-xl border ">
           <Box className="headerTitel  border-b py-5">
             {selectedImages.length <= 0 && (
               <Heading className="titel text-lg font-bold px-5">
@@ -105,41 +99,64 @@ function App() {
                 onDrop={(e) => handleDrop(e, 0)}
                 onDragOver={(e) => e.preventDefault()}
               >
-                <Box
-                  className={`item-img relative group transition-colors overflow-hidden h-[440px] border rounded-md`}
-                >
-                  <Picture
-                    className={`items after:absolute after:top-[100%] after:left-0 after:w-full after:h-full after:content after:bg-[rgba(0,0,0,0.48)] after:transition-colors after:z-10 group-after:rounded-md group-hover:after:top-0 after:rounded-md ${
-                      selectedImages.includes(0)
-                        ? "after:!top-0 after:bg-[rgba(2,2,2,0.2)]"
-                        : ""
-                    }`}
+                {showNoPhoto ? (
+                  <Box
+                    className={`item-img relative group transition-colors overflow-hidden h-[440px] border rounded-md`}
                   >
-                    <Images
-                      src={images[0]}
-                      className="absolute top-[50%] left-[50%] translate-y-[-50%] translate-x-[-50%]"
-                      alt={`image-1`}
-                      onDragStart={(e) => handleDragStart(e, 0)}
-                      draggable={true}
+                    <Picture
+                      className={`items after:absolute after:top-[100%] after:left-0 after:w-full after:h-full after:content after:bg-[rgba(0,0,0,0.48)] after:transition-colors after:z-10 group-after:rounded-md  after:rounded-md ${
+                        selectedImages.includes(0)
+                          ? "after:!top-0 after:bg-[rgba(2,2,2,0.2)]"
+                          : ""
+                      }`}
+                    >
+                      <Images
+                        src={"./assets/noPhoto.jpg"}
+                        className="absolute top-[50%] left-[50%] translate-y-[-50%] translate-x-[-50%]"
+                        alt={`./assets/noPhoto.jpg`}
+                        onDragStart={(e) => handleDragStart(e, 0)}
+                        draggable={true}
+                      />
+                    </Picture>
+                  </Box>
+                ) : (
+                  <Box
+                    className={`item-img relative group transition-colors overflow-hidden h-[440px] border rounded-md`}
+                  >
+                    <Picture
+                      className={`items after:absolute after:top-[100%] after:left-0 after:w-full after:h-full after:content after:bg-[rgba(0,0,0,0.48)] after:transition-colors after:z-10 group-after:rounded-md group-hover:after:top-0 after:rounded-md ${
+                        selectedImages.includes(0)
+                          ? "after:!top-0 after:bg-[rgba(2,2,2,0.2)]"
+                          : ""
+                      }`}
+                    >
+                      <Images
+                        src={images[0]}
+                        className="absolute top-[50%] left-[50%] translate-y-[-50%] translate-x-[-50%]"
+                        alt={`image-1`}
+                        onDragStart={(e) => handleDragStart(e, 0)}
+                        draggable={true}
+                      />
+                    </Picture>
+
+                    <InputChekbox
+                      type="checkbox"
+                      className={`absolute ${
+                        selectedImages.includes(0) ? "block " : "hidden"
+                      } group-hover:block w-[20px] h-[20px] top-2 left-2 z-10`}
+                      checked={selectedImages.includes(0)}
+                      onChange={() => {
+                        if (selectedImages.includes(0)) {
+                          setSelectedImages(
+                            selectedImages.filter((i) => i !== 0)
+                          );
+                        } else {
+                          setSelectedImages([0, ...selectedImages]);
+                        }
+                      }}
                     />
-                  </Picture>
-                  <InputChekbox
-                    type="checkbox"
-                    className={`absolute ${
-                      selectedImages.includes(0) ? "block " : "hidden"
-                    } group-hover:block w-[20px] h-[20px] top-2 left-2 z-10`}
-                    checked={selectedImages.includes(0)}
-                    onChange={() => {
-                      if (selectedImages.includes(0)) {
-                        setSelectedImages(
-                          selectedImages.filter((i) => i !== 0)
-                        );
-                      } else {
-                        setSelectedImages([0, ...selectedImages]);
-                      }
-                    }}
-                  />
-                </Box>
+                  </Box>
+                )}
               </Box>
 
               {images
@@ -197,6 +214,7 @@ function App() {
                     onChange={(e) => {
                       const files = Array.from(e.target.files);
                       const newImages = [...images];
+                      setShowNoPhoto(false);
                       files.forEach((file) => {
                         newImages.push(URL.createObjectURL(file));
                       });

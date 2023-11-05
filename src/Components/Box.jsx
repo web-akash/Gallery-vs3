@@ -10,6 +10,9 @@ const Box = ({
   onDragStart,
   key,
   draggable,
+  onTouchMove,
+  onTouchEnd,
+  onTouchStart,
 }) => {
   return (
     <div
@@ -21,6 +24,9 @@ const Box = ({
       onClick={onClick}
       className={className}
       onDragStart={onDragStart}
+      onTouchMove={onTouchMove}
+      onTouchEnd={onTouchEnd}
+      onTouchStart={onTouchStart}
     >
       {children}
     </div>

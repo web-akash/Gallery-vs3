@@ -1,6 +1,14 @@
 import React from "react";
 
-const Images = ({ src, className, alt, onDragStart, draggable }) => {
+const Images = ({
+  src,
+  className,
+  alt,
+  onDragStart,
+  draggable,
+  onTouchStart,
+  onTouchMove,
+}) => {
   return (
     <img
       src={src}
@@ -8,6 +16,8 @@ const Images = ({ src, className, alt, onDragStart, draggable }) => {
       alt={alt}
       onDragStart={onDragStart}
       draggable={draggable}
+      onTouchStart={onTouchStart}
+      onTouchMove={onTouchMove}
     />
   );
 };
