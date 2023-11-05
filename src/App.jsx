@@ -161,6 +161,7 @@ function App() {
 
               {images
                 .filter((_, index) => index !== 0)
+                .reverse()
                 .map((image, index) => (
                   <Box
                     key={index + 1}
