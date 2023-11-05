@@ -3,7 +3,7 @@
 Welcome to the **Gallery Application**, a dynamically designed and fully responsive web page application optimized for all devices. view it live [here](https://galleryvs3.netlify.app).
 ## https://galleryvs3.netlify.app
 
-![Uploading screencapture-127-0-0-1-5173-2023-11-05-23_38_34.png…]()
+![screencapture-127-0-0-1-5173-2023-11-05-23_38_34](https://github.com/web-akash/Gallery-vs3/assets/95634170/5cffeb1b-4e03-418f-85d8-60e02346e74f)
 
 ### What You'll Get with This Landing Page:
 - **Drag-and-drop functionality**
