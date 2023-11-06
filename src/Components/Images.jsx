@@ -8,6 +8,7 @@ const Images = ({
   draggable,
   onTouchStart,
   onTouchMove,
+  onTouchEnd,
 }) => {
   return (
     <img
@@ -18,6 +19,7 @@ const Images = ({
       draggable={draggable}
       onTouchStart={onTouchStart}
       onTouchMove={onTouchMove}
+      onTouchEnd={onTouchEnd}
     />
   );
 };

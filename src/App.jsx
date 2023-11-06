@@ -10,9 +10,7 @@ import Label from "./Components/Label";
 
 function App() {
   const [images, setImages] = useState([]);
-  console.log(images.length);
   const [showNoPhoto, setShowNoPhoto] = useState(true);
-
   const [selectedImages, setSelectedImages] = useState([]);
   const [featureImageIndex, setFeatureImageIndex] = useState(0);
 
@@ -50,6 +48,16 @@ function App() {
     }
   };
 
+  const handleImageUpload = (newImages) => {
+    const updatedImages = [...images];
+    updatedImages.splice(1, 0, ...newImages);
+    setImages(updatedImages);
+    setShowNoPhoto(false);
+
+    if (images.length === 0) {
+      setFeatureImageIndex(1);
+    }
+  };
   return (
     <>
       <Box className="bg-blue-100 min-h-screen overflow-x-hidden md:py-4 flex items-center ">
@@ -68,14 +76,6 @@ function App() {
                     type="checkbox"
                     className="w-[15px] h-[20px] "
                     checked={true}
-                    // checked={selectedImages.length === images.length}
-                    // onChange={() =>
-                    //   setSelectedImages(
-                    //     selectedImages.length === images.length
-                    //       ? []
-                    //       : Array.from({ length: images.length }, (_, i) => i)
-                    //   )
-                    // }
                   />
                   <span className="select-file-count ml-2 text-lg">
                     {selectedImages.length}
@@ -99,9 +99,10 @@ function App() {
                 onDrop={(e) => handleDrop(e, 0)}
                 onDragOver={(e) => e.preventDefault()}
               >
+                {/* Feature image list */}
                 {showNoPhoto ? (
                   <Box
-                    className={`item-img relative group transition-colors overflow-hidden h-[440px] border rounded-md`}
+                    className={`feature-image relative group transition-colors overflow-hidden h-[440px] border rounded-md`}
                   >
                     <Picture
                       className={`items after:absolute after:top-[100%] after:left-0 after:w-full after:h-full after:content after:bg-[rgba(0,0,0,0.48)] after:transition-colors after:z-10 group-after:rounded-md  after:rounded-md ${
@@ -119,7 +120,7 @@ function App() {
                   </Box>
                 ) : (
                   <Box
-                    className={`item-img relative group transition-colors overflow-hidden h-[440px] border rounded-md`}
+                    className={`feature-image relative group transition-colors overflow-hidden h-[440px] border rounded-md`}
                   >
                     <Picture
                       className={`items after:absolute after:top-[100%] after:left-0 after:w-full after:h-full after:content after:bg-[rgba(0,0,0,0.48)] after:transition-colors after:z-10 group-after:rounded-md group-hover:after:top-0 after:rounded-md ${
@@ -207,16 +208,14 @@ function App() {
                   <AiOutlineCloudUpload size={30} />
                   <InputChekbox
                     type="file"
-                    className="opacity-0 invisible "
+                    className="opacity-0 invisible"
                     multiple={true}
                     onChange={(e) => {
                       const files = Array.from(e.target.files);
-                      const newImages = [...images];
-                      setShowNoPhoto(false);
-                      files.forEach((file) => {
-                        newImages.push(URL.createObjectURL(file));
-                      });
-                      setImages(newImages);
+                      const newImages = files.map((file) =>
+                        URL.createObjectURL(file)
+                      );
+                      handleImageUpload(newImages);
                     }}
                   />
                   <Heading className="text-base font-medium">Add Image</Heading>
